@@ -9,6 +9,16 @@ class SearchBar extends Component {
 
   state = { query: '' };
 
+  handleChange = event => {
+    this.setState({ query: event.target.value });
+  };
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.onSubmit(this.state.query);
+    this.setState({ query: '' });
+  };
+
   render() {
     return (
       <header className={styles.searchbar}>
