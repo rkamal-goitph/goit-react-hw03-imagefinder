@@ -1,4 +1,3 @@
-// src/components/ImageGalleryItem/ImageGalleryItem.js
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Modal from '../Modal/Modal';
@@ -17,24 +16,25 @@ class ImageGalleryItem extends Component {
     showModal: false,
   };
 
-  toggleModal = () => {
-    this.setState(
-      prevState => ({
-        showModal: !prevState.showModal,
-      }),
-      () => {
-        const gallery = document.querySelector('.js-gallery');
-        if (!gallery) return;
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.showModal !== this.state.showModal) {
+      const gallery = document.querySelector('.js-gallery');
+      if (!gallery) return;
 
-        if (this.state.showModal) {
-          console.log('Modal is now shown');
-          gallery.style.pointerEvents = 'none';
-        } else {
-          console.log('Modal is now hidden');
-          gallery.style.pointerEvents = 'auto';
-        }
+      if (this.state.showModal) {
+        console.log('Modal is now shown');
+        gallery.style.pointerEvents = 'none';
+      } else {
+        console.log('Modal is now hidden');
+        gallery.style.pointerEvents = 'auto';
       }
-    );
+    }
+  }
+
+  toggleModal = () => {
+    this.setState(prevState => ({
+      showModal: !prevState.showModal,
+    }));
   };
 
   render() {
